@@ -13,28 +13,16 @@ import {PopularMoviesService} from '../movies-services/popular-movies.service';
 export class PopularMoviesComponent implements OnInit {
   private req: any;
   movies: [any];
-  selected_movie: any = null;
-  show_list = true;
-  img_base_url = 'https://image.tmdb.org/t/p/w500';
-
+  current_page = 1;
 
   constructor(private popular_movie_service: PopularMoviesService) { }
 
   ngOnInit() {
-    this.req = this.popular_movie_service.list().subscribe(data => {
+    this.req = this.popular_movie_service.list(this.current_page).subscribe(data => {
       console.log(data);
       this.movies = data;
 
     });
-  }
-
-  select_movie(movie: any) {
-    this.selected_movie = movie;
-    this.show_list = false;
-  }
-  deselect_movie() {
-    this.selected_movie = null;
-    this.show_list = true;
   }
 
 }

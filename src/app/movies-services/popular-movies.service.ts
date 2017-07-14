@@ -11,13 +11,11 @@ const endpoint = 'https://api.themoviedb.org/3/tv/popular?api_key=977f1a27ed72e9
 @Injectable()
 export class PopularMoviesService {
 
-  curent_page = 1;
-
   constructor(private _http: Http) { }
 
 
-  list() {
-    return this._http.get(endpoint + this.curent_page)
+  list(page_number: number) {
+    return this._http.get(endpoint + page_number)
                 .map(response => response.json().results)
                 .catch(this.handle_error);
   }
