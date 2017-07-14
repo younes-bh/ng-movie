@@ -15,8 +15,10 @@ export class SearchDetailComponent implements OnInit, OnDestroy {
   private routeSub: any;
   private req: any;
   query: String;
-  current_page = 1;
   movies: [any];
+  total_results: number;
+  total_pages: number;
+  current_page = 1;
 
 
   constructor(private _route: ActivatedRoute, private search_movie_service: SearchMovieService) {
@@ -29,13 +31,45 @@ export class SearchDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.req = this.search_movie_service.search(this.query, this.current_page).subscribe(data => {
       console.log(data);
-      this.movies = data;
+      this.movies = data.results;
+      this.total_pages = data.total_pages;
+      this.total_results = data.total_results;
 
     });
   }
 
 
   ngOnDestroy() {
+  }
+
+
+  get_movies() {
+    this.req = this.search_movie_service.search(this.query, this.current_page).subscribe(data => {
+      console.log(data.results);
+      this.movies = data.results;
+    });
+  }
+
+  next_page(event) {
+    if (this.current_page < this.total_pages) {
+      this.current_page += 1;
+      this.get_movies();
+      console.log(this.current_page);
+
+
+
+    }
+
+  }
+
+  previous_page(event) {
+    if (this.current_page > 1) {
+      this.current_page -= 1;
+      this.get_movies();
+      console.log(this.current_page);
+
+
+    }
   }
 
 }

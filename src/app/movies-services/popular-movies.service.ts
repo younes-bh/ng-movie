@@ -16,7 +16,7 @@ export class PopularMoviesService {
 
   list(page_number: number) {
     return this._http.get(endpoint + page_number)
-                .map(response => response.json().results)
+                .map(response => response.json())
                 .catch(this.handle_error);
   }
 

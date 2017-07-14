@@ -17,7 +17,7 @@ export class SearchMovieService {
   search(query, page_number) {
     let url = endpoint + '&page=' + page_number + '&query=' + query ;
     return this._http.get(url)
-      .map(response => response.json().results)
+      .map(response => response.json())
       .catch(this.handle_error);
   }
 
