@@ -1,0 +1,44 @@
+<div class="row " [hidden] = '!show_list'>
+  <div class="col-sm-6 col-md-4 " *ngFor="let movie of movies">
+    <div class="thumbnail ">
+      <h2 class="text-center"> {{movie.name}} </h2>
+      <img [src]= 'img_base_url + movie.poster_path' alt="poster du film">
+      <div class="caption">
+        <h4> Vote average :</h4>
+        <p>{{movie.vote_average | stars}} ({{movie.vote_average}})</p>
+        <p>
+          <a href="#" class="btn btn-primary" role="button" (click)="select_movie(movie)"> Show Detail</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container" [hidden] = 'show_list' *ngIf="selected_movie">
+
+  <div class="jumbotron" >
+    <div class="text-center">
+      <h1> {{selected_movie.name}}</h1>
+      <img [src]= 'img_base_url + selected_movie.poster_path' alt="poster du film">
+    </div>
+
+    <h3>Synopsis</h3>
+    <p>{{selected_movie.overview}}</p>
+
+    <h3>Release Date</h3>
+    <p>{{selected_movie.first_air_date}}</p>
+
+    <h3> Vote Average </h3>
+    <p>{{selected_movie.vote_average | stars}} ({{selected_movie.vote_average}})</p>
+
+    <h3> Popularity </h3>
+    <p>{{selected_movie.popularity}}  ({{selected_movie.vote_count}} votes) </p>
+
+    <p>
+      <a href="#" class="btn btn-primary" role="button" (click)="deselect_movie()"> Hide Detail</a>
+    </p>
+
+  </div>
+
+</div>
