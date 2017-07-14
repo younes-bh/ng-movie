@@ -8,68 +8,59 @@ import {SearchMovieService} from '../movies-services/search-movie.service';
   selector: 'app-search-detail',
   templateUrl: './search-detail.component.html',
   styleUrls: ['./search-detail.component.css'],
-  providers: [SearchMovieService]
 })
 export class SearchDetailComponent implements OnInit, OnDestroy {
 
   private routeSub: any;
-  private req: any;
   query: String;
-  movies: [any];
-  total_results: number;
+  movies: any;
   total_pages: number;
-  current_page = 1;
+  total_results: number;
+
 
 
   constructor(private _route: ActivatedRoute, private search_movie_service: SearchMovieService) {
-    this.routeSub = this._route.params.subscribe(params => {
-      console.log(params);
-      this.query = params['q'];
-    });
+
   }
 
   ngOnInit() {
-    this.req = this.search_movie_service.search(this.query, this.current_page).subscribe(data => {
-      console.log(data);
-      this.movies = data.results;
-      this.total_pages = data.total_pages;
-      this.total_results = data.total_results;
-
+    console.log('ngOnInit');
+    this.routeSub = this._route.params.subscribe(params => {
+      this.query = params['q'];
+      this.search_movie_service.search(this.query).subscribe(response => {
+        ({ search_result: this.movies, total_pages: this.total_pages , total_results: this.total_pages} = response);
+      });
     });
   }
-
 
   ngOnDestroy() {
+    this.routeSub.unsubscribe();
   }
 
-
-  get_movies() {
-    this.req = this.search_movie_service.search(this.query, this.current_page).subscribe(data => {
-      console.log(data.results);
-      this.movies = data.results;
-    });
-  }
 
   next_page(event) {
-    if (this.current_page < this.total_pages) {
-      this.current_page += 1;
-      this.get_movies();
-      console.log(this.current_page);
+    return this.search_movie_service.next_page(event, this.query).subscribe();
+  }
 
-
-
-    }
-
+  has_next() {
+    return this.search_movie_service.has_next();
   }
 
   previous_page(event) {
-    if (this.current_page > 1) {
-      this.current_page -= 1;
-      this.get_movies();
-      console.log(this.current_page);
-
-
-    }
+    return this.search_movie_service.previous_page(event, this.query).subscribe();
   }
+
+  has_previous() {
+    return this.search_movie_service.has_previous();
+  }
+
+  last_page(event) {
+    return this.search_movie_service.last_page(event, this.query).subscribe();
+  }
+
+  first_page(event) {
+    return this.search_movie_service.first_page(event, this.query).subscribe();
+  }
+
 
 }

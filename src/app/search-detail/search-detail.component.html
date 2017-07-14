@@ -5,20 +5,30 @@
   <h3 class="text-center" > Search results for : {{query}}</h3>
 </div>
 
-<app-movie-list [passed_movie_list] ='movies' *ngIf='movies'> </app-movie-list>
+<app-movie-list [passed_movie_list] ="movies" *ngIf="movies"> </app-movie-list>
 
 
 <div class="text-center">
   <nav aria-label="Page navigation">
     <ul class="pagination pagination-lg">
       <li>
-        <a aria-label="Previous" (click)="previous_page($event)">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
 
-        <a aria-label="Next" (click)="next_page($event)">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
+        <button aria-label="First" (click)="first_page($event)" [disabled]="!has_previous()">
+          <span aria-hidden="true"> <<   </span>
+        </button>
+
+        <button aria-label="Previous" (click)="previous_page($event)" [disabled]="!has_previous()">
+          <span aria-hidden="true"> < </span>
+        </button>
+
+        <button aria-label="Next" (click)="next_page($event)" [disabled]="!has_next()">
+          <span aria-hidden="true"> > </span>
+        </button>
+
+        <button aria-label="Last" (click)="last_page($event)" [disabled]="!has_next()">
+          <span aria-hidden="true"> >> </span>
+        </button>
+
       </li>
     </ul>
   </nav>

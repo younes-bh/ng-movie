@@ -1,20 +1,22 @@
-<div class="text-center">
-  <h1 *ngIf='movie.name'> {{movie.name}}</h1>
-  <h1 *ngIf='!movie.name'> {{movie.title}}</h1>
+<div>
+  <div class="text-center">
+    <h1 *ngIf='movie.name'> {{movie.name}}</h1>
+    <h1 *ngIf='!movie.name'> {{movie.title}}</h1>
 
-  <img *ngIf="movie.poster_path" [src]= 'img_base_url + movie.poster_path' alt="poster du film">
+    <img *ngIf="movie.poster_path" [src]= 'img_base_url + movie.poster_path' alt="poster du film">
+  </div>
+
+  <h3>Synopsis</h3>
+  <p>{{movie.overview}}</p>
+
+  <h3>Release Date</h3>
+  <p *ngIf='movie.first_air_date'>{{movie.first_air_date}}</p>
+  <p *ngIf='!movie.first_air_date'>{{movie.release_date}}</p>
+
+
+  <h3> Vote Average </h3>
+  <p>{{movie.vote_average | stars}} ({{movie.vote_average}})</p>
+
+  <h3> Popularity </h3>
+  <p>{{movie.popularity}}  ({{movie.vote_count}} votes) </p>
 </div>
-
-<h3>Synopsis</h3>
-<p>{{movie.overview}}</p>
-
-<h3>Release Date</h3>
-<p *ngIf='movie.first_air_date'>{{movie.first_air_date}}</p>
-<p *ngIf='!movie.first_air_date'>{{movie.release_date}}</p>
-
-
-<h3> Vote Average </h3>
-<p>{{movie.vote_average | stars}} ({{movie.vote_average}})</p>
-
-<h3> Popularity </h3>
-<p>{{movie.popularity}}  ({{movie.vote_count}} votes) </p>

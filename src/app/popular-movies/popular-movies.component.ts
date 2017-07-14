@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 
 import {PopularMoviesService} from '../movies-services/popular-movies.service';
@@ -10,53 +10,50 @@ import {PopularMoviesService} from '../movies-services/popular-movies.service';
   styleUrls: ['./popular-movies.component.css'],
   providers: [PopularMoviesService]
 })
-export class PopularMoviesComponent implements OnInit {
+export class PopularMoviesComponent implements OnInit, OnDestroy {
   private req: any;
   movies: [any];
   total_results: number;
   total_pages: number;
-  current_page = 1;
 
   constructor(private popular_movie_service: PopularMoviesService) { }
 
   ngOnInit() {
-    this.req = this.popular_movie_service.list(this.current_page).subscribe(data => {
-      console.log(data.results);
-      this.movies = data.results;
-      this.total_pages = data.total_pages;
-      this.total_results = data.total_results;
+    this.req = this.popular_movie_service.list().subscribe(response => {
+      ({ movies: this.movies, total_pages: this.total_pages , total_results: this.total_results} = response);
+      console.log(this.total_pages);
 
     });
   }
 
-  get_movies() {
-    this.req = this.popular_movie_service.list(this.current_page).subscribe(data => {
-      console.log(data.results);
-      this.movies = data.results;
-    });
+  ngOnDestroy() {
+    this.req.unsubscribe();
   }
 
   next_page(event) {
-    if (this.current_page < this.total_pages) {
-      this.current_page += 1;
-      this.get_movies();
-      console.log(this.current_page);
+    return this.popular_movie_service.next_page(event).subscribe();
+  }
 
-
-
-    }
-
+  has_next() {
+    return this.popular_movie_service.has_next();
   }
 
   previous_page(event) {
-    if (this.current_page > 1) {
-      this.current_page -= 1;
-      this.get_movies();
-      console.log(this.current_page);
-
-
-    }
+    return this.popular_movie_service.previous_page(event).subscribe();
   }
+
+  has_previous() {
+    return this.popular_movie_service.has_previous();
+  }
+
+  last_page(event) {
+    return this.popular_movie_service.last_page(event).subscribe();
+  }
+
+  first_page(event) {
+    return this.popular_movie_service.first_page(event).subscribe();
+  }
+
 
 }
 
