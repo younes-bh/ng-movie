@@ -23,7 +23,6 @@ export class SearchMovieService {
     const url = `${endpoint}&page=${this.current_page}&query=${query}`;
     return this._http.get(url)
         .map(response => {
-            console.log(response.json());
             this.search_result.splice(0, this.search_result.length, ...response.json().results);
             this.total_results = response.json().total_results;
             this.total_pages = response.json().total_pages;

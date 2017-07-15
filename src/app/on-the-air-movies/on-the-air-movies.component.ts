@@ -22,7 +22,6 @@ export class OnTheAirMoviesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.req = this.movie_list_service.list(endpoint).subscribe(response => {
       ({ movies: this.movies, total_pages: this.total_pages , total_results: this.total_results} = response);
-      console.log(this.total_pages);
 
     });
   }

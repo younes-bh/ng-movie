@@ -15,8 +15,6 @@ export class SearchComponent implements OnInit {
   }
 
   submit_search(event, form_data) {
-    console.log(event);
-    console.log(form_data.value);
     let query = form_data.value['q'];
     if (query) {
       this._router.navigate(['/search', {q: query}]);

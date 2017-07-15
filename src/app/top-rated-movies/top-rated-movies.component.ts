@@ -23,8 +23,6 @@ export class TopRatedMoviesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.req = this.list_movie_service.list(endpoint).subscribe(response => {
       ({ movies: this.movies, total_pages: this.total_pages , total_results: this.total_results} = response);
-      console.log(this.total_pages);
-
     });
   }
 

@@ -19,7 +19,6 @@ export class ListMovieService {
     const url = endpoint + this.current_page;
     return this._http.get(url)
       .map(response => {
-        console.log(response.json());
         this.movies.splice(0, this.movies.length, ...response.json().results);
         this.total_results = response.json().total_results;
         this.total_pages = response.json().total_pages;
