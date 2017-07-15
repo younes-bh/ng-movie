@@ -1,46 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
-
-import {ListMovieService} from '../movies-services/list-movie.service';
-
-
-const endpoint = 'https://api.themoviedb.org/3/tv/top_rated?api_key=977f1a27ed72e90257321e745c06e951&language=en-US&page=';
+// http://jasonwatmore.com/post/2016/08/23/angular-2-pagination-example-with-logic-like-google
 
 
 @Component({
-  selector: 'app-top-rated-movies',
-  templateUrl: './top-rated-movies.component.html',
-  styleUrls: ['./top-rated-movies.component.css']
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.css']
 })
-export class TopRatedMoviesComponent implements OnInit, OnDestroy {
-  private req: any;
-  movies: [any];
-  total_results: number;
-  total_pages: number;
-  current_page = 1;
+export class PaginationComponent implements OnInit {
+
+  @Input()
+  passed_total_pages;
   // pager object
   pager: any = {};
 
 
-  constructor(private movie_list_service: ListMovieService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.req = this.movie_list_service.load(endpoint, this.current_page).subscribe(response => {
-      ({ movies: this.movies, total_pages: this.total_pages , total_results: this.total_results} = response);
-      this.set_page(this.current_page);
-    });
-  }
-
-  ngOnDestroy() {
-    this.req.unsubscribe();
-  }
-
-  load(page_number: number) {
-    this.current_page = page_number;
-    this.req = this.movie_list_service.load(endpoint, this.current_page).subscribe(response => {
-      ({ movies: this.movies, total_pages: this.total_pages , total_results: this.total_results} = response);
-      this.set_page(this.current_page);
-    });
+    this.set_page(1);
   }
 
   get_pager(total_pages: number, current_page: number = 1) {
@@ -88,16 +67,10 @@ export class TopRatedMoviesComponent implements OnInit, OnDestroy {
     if (page < 1 || page > this.pager.total_pages) {
       return;
     }
+
     // get pager object from service
-    this.pager = this.get_pager(this.total_pages, page);
+    this.pager = this.get_pager(this.passed_total_pages, page);
 
   }
 
 }
-
-
-
-
-
-
-

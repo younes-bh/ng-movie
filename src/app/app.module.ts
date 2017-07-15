@@ -20,6 +20,7 @@ import { ListMovieService } from './movies-services/list-movie.service';
 
 import { TopRatedMoviesComponent } from './top-rated-movies/top-rated-movies.component';
 import { OnTheAirMoviesComponent } from './on-the-air-movies/on-the-air-movies.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { OnTheAirMoviesComponent } from './on-the-air-movies/on-the-air-movies.c
     MovieDetailComponent,
     MovieListComponent,
     TopRatedMoviesComponent,
-    OnTheAirMoviesComponent
+    OnTheAirMoviesComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

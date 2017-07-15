@@ -4,6 +4,8 @@
     <h1 *ngIf='!movie.name'> {{movie.title}}</h1>
 
     <img *ngIf="movie.poster_path" [src]= 'img_base_url + movie.poster_path' alt="poster du film">
+    <img *ngIf="!movie.poster_path" src= "../../assets/image/image_not_found.png" alt="poster du film">
+
   </div>
 
   <h3>Synopsis</h3>

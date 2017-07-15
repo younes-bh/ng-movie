@@ -15,12 +15,13 @@ export class SearchMovieService {
   search_result = [];
   total_results: number;
   total_pages: number;
-  current_page = 1;
+  // current_page = 1;
 
   constructor(private _http: Http) { }
 
-  search(query): any {
-    const url = `${endpoint}&page=${this.current_page}&query=${query}`;
+
+  search(query, page): any {
+    const url = `${endpoint}&page=${page}&query=${query}`;
     return this._http.get(url)
         .map(response => {
             this.search_result.splice(0, this.search_result.length, ...response.json().results);
@@ -38,6 +39,7 @@ export class SearchMovieService {
     console.log(error, caught);
   }
 
+  /*
   next_page(event, query) {
   if (this.has_next()) {
     this.current_page += 1;
@@ -89,6 +91,6 @@ export class SearchMovieService {
         this.search_result.splice(0, this.search_result.length, ...data.results);
       });
   }
-
+  */
 
 }

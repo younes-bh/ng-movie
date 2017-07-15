@@ -11,12 +11,12 @@ export class ListMovieService {
   movies = [];
   total_results: number;
   total_pages: number;
-  current_page = 1;
+  // current_page = 1;
 
   constructor(private _http: Http) { }
 
-  list(endpoint: string): any {
-    const url = endpoint + this.current_page;
+  load(endpoint: string, page: number): any {
+    const url = endpoint + page;
     return this._http.get(url)
       .map(response => {
         this.movies.splice(0, this.movies.length, ...response.json().results);
@@ -33,6 +33,23 @@ export class ListMovieService {
   private handle_error(error: any , caught: any): any {
     console.log(error, caught);
   }
+
+  /*
+  list(endpoint: string): any {
+    const url = endpoint + this.current_page;
+    return this._http.get(url)
+      .map(response => {
+        this.movies.splice(0, this.movies.length, ...response.json().results);
+        this.total_results = response.json().total_results;
+        this.total_pages = response.json().total_pages;
+        return  { movies: this.movies,
+          total_pages: this.total_pages,
+          total_results: this.total_results
+        };
+      })
+      .catch(this.handle_error);
+  }
+
 
   next_page(event, endpoint: string) {
     if (this.has_next()) {
@@ -85,4 +102,5 @@ export class ListMovieService {
         this.movies.splice(0, this.movies.length, ...data.results);
       });
   }
+  */
 }

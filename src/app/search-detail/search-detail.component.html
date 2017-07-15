@@ -8,28 +8,32 @@
 <app-movie-list [passed_movie_list] ="movies" *ngIf="movies"> </app-movie-list>
 
 
-<div class="text-center">
-  <nav aria-label="Page navigation">
-    <ul class="pagination pagination-lg">
-      <li>
+<div>
+  <div class="container">
+    <div class="text-center">
+      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
 
-        <button aria-label="First" (click)="first_page($event)" [disabled]="!has_previous()">
-          <span aria-hidden="true"> <<   </span>
-        </button>
+        <li [ngClass]="{disabled:pager.current_page === 1}">
+          <a (click)="search(1)">First</a>
+        </li>
 
-        <button aria-label="Previous" (click)="previous_page($event)" [disabled]="!has_previous()">
-          <span aria-hidden="true"> < </span>
-        </button>
+        <li [ngClass]="{disabled:pager.current_page === 1}">
+          <a (click)="search(pager.current_page - 1)">Previous</a>
+        </li>
 
-        <button aria-label="Next" (click)="next_page($event)" [disabled]="!has_next()">
-          <span aria-hidden="true"> > </span>
-        </button>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.current_page === page}">
+          <a (click)="search(page)">{{page}}</a>
+        </li>
 
-        <button aria-label="Last" (click)="last_page($event)" [disabled]="!has_next()">
-          <span aria-hidden="true"> >> </span>
-        </button>
+        <li [ngClass]="{disabled:pager.current_page === pager.total_pages}">
+          <a (click)="search(pager.current_page + 1)">Next</a>
+        </li>
 
-      </li>
-    </ul>
-  </nav>
+        <li [ngClass]="{disabled:pager.current_page === pager.total_pages}">
+          <a (click)="search(pager.total_pages)">Last</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
 </div>

@@ -8,19 +8,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" routerLink="/">The Movie App</a>
+      <a class="navbar-brand" routerLink="/" (click)="current_section=0">The Movie App</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav">
-        <li><a routerLink="/popular">Popular</a></li>
-        <li><a routerLink="/top-rated">Top Rated</a></li>
-        <li><a routerLink="/on-the-air">On The Air</a></li>
+        <li [ngClass]="{active:current_section === 1}"> <a routerLink="/popular" (click)="current_section=1">Popular</a> </li>
+        <li [ngClass]="{active:current_section === 2}"> <a routerLink="/top-rated" (click)="current_section=2">Top Rated</a> </li>
+        <li [ngClass]="{active:current_section === 3}"> <a routerLink="/on-the-air" (click)="current_section=3">On The Air</a> </li>
       </ul>
 
-      <app-search></app-search>
+
+      <app-search (click)="current_section=0"></app-search>
 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

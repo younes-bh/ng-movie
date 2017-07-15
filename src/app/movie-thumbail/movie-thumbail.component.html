@@ -1,9 +1,19 @@
 <div class="movie-thumbail">
+
   <h2 class="text-center" *ngIf='movie.name'> {{movie.name}}</h2>
+
   <h2 class="text-center" *ngIf='!movie.name'> {{movie.title}}</h2>
+
   <img class="poster" *ngIf="movie.poster_path"  [src]= 'img_base_url + movie.poster_path' alt="poster du film">
+  <img class="poster" *ngIf="!movie.poster_path"  src= "../../assets/image/image_not_found.png" alt="poster du film">
+
+
   <div class="caption">
+
     <h4> Vote average :</h4>
+
     <p>{{ movie.vote_average | stars }} ({{movie.vote_average}})</p>
+
   </div>
+
 </div>
