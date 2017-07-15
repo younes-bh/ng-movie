@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {Http} from '@angular/http';
 
 
@@ -6,11 +6,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 
-const endpoint = 'https://api.themoviedb.org/3/tv/popular?api_key=977f1a27ed72e90257321e745c06e951&language=en-US&page=';
-
 @Injectable()
-export class PopularMoviesService {
-
+export class ListMovieService {
   movies = [];
   total_results: number;
   total_pages: number;
@@ -18,7 +15,7 @@ export class PopularMoviesService {
 
   constructor(private _http: Http) { }
 
-  list(): any {
+  list(endpoint: string): any {
     const url = endpoint + this.current_page;
     return this._http.get(url)
       .map(response => {
@@ -38,7 +35,7 @@ export class PopularMoviesService {
     console.log(error, caught);
   }
 
-  next_page(event) {
+  next_page(event, endpoint: string) {
     if (this.has_next()) {
       this.current_page += 1;
       const url = endpoint + this.current_page;
@@ -54,7 +51,7 @@ export class PopularMoviesService {
     return this.current_page < this.total_pages;
   }
 
-  previous_page(event) {
+  previous_page(event, endpoint: string) {
     if (this.has_previous()) {
       this.current_page -= 1;
       const url = endpoint + this.current_page;
@@ -70,7 +67,7 @@ export class PopularMoviesService {
     return this.current_page > 1;
   }
 
-  first_page(event){
+  first_page(event, endpoint: string) {
     this.current_page = 1;
     const url = endpoint + this.current_page;
     return this._http.get(url)
@@ -80,7 +77,7 @@ export class PopularMoviesService {
       });
   }
 
-  last_page(event){
+  last_page(event, endpoint: string) {
     this.current_page = this.total_pages;
     const url = endpoint + this.current_page;
     return this._http.get(url)

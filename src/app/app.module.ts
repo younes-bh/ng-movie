@@ -14,7 +14,12 @@ import { SearchDetailComponent } from './search-detail/search-detail.component';
 import { MovieThumbailComponent } from './movie-thumbail/movie-thumbail.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
+
 import { SearchMovieService } from './movies-services/search-movie.service';
+import { ListMovieService } from './movies-services/list-movie.service';
+
+import { TopRatedMoviesComponent } from './top-rated-movies/top-rated-movies.component';
+import { OnTheAirMoviesComponent } from './on-the-air-movies/on-the-air-movies.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,9 @@ import { SearchMovieService } from './movies-services/search-movie.service';
     SearchDetailComponent,
     MovieThumbailComponent,
     MovieDetailComponent,
-    MovieListComponent
+    MovieListComponent,
+    TopRatedMoviesComponent,
+    OnTheAirMoviesComponent
   ],
   imports: [
     BrowserModule,
@@ -41,10 +48,28 @@ import { SearchMovieService } from './movies-services/search-movie.service';
       {
         path: 'search',
         component: SearchDetailComponent
+      },
+      {
+        path: 'popular',
+        component: PopularMoviesComponent
+      },
+      {
+        path: 'top-rated',
+        component: TopRatedMoviesComponent
+      },
+      {
+        path: 'on-the-air',
+        component: OnTheAirMoviesComponent
+      },
+      { path: '**',
+        redirectTo: ''
       }
+
     ])
   ],
-  providers: [SearchMovieService
+  providers: [SearchMovieService,
+    ListMovieService
+
   ],
   bootstrap: [AppComponent]
 })

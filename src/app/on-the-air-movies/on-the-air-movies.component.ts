@@ -1,18 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-
 import {ListMovieService} from '../movies-services/list-movie.service'
 
 
-const endpoint = 'https://api.themoviedb.org/3/tv/popular?api_key=977f1a27ed72e90257321e745c06e951&language=en-US&page=';
+const endpoint = 'https://api.themoviedb.org/3/tv/on_the_air?api_key=977f1a27ed72e90257321e745c06e951&language=en-US&page=';
 
 
 @Component({
-  selector: 'app-popular-movies',
-  templateUrl: './popular-movies.component.html',
-  styleUrls: ['./popular-movies.component.css'],
+  selector: 'app-on-the-air-movies',
+  templateUrl: './on-the-air-movies.component.html',
+  styleUrls: ['./on-the-air-movies.component.css']
 })
-export class PopularMoviesComponent implements OnInit, OnDestroy {
+export class OnTheAirMoviesComponent implements OnInit, OnDestroy {
   private req: any;
   movies: [any];
   total_results: number;
@@ -58,6 +57,4 @@ export class PopularMoviesComponent implements OnInit, OnDestroy {
 
 
 }
-
-
 

@@ -1,0 +1,34 @@
+<!--  Le ngIf c'est pour attendre que les movies se charge, si je l'enlève rien ne s'affiche
+      Il n'y a pas une autre manière de faire pour attendre ???
+-->
+<div class="jumbotron" >
+  <h1 class="text-center" > Top rated movies</h1>
+</div>
+
+<app-movie-list [passed_movie_list] ='movies' *ngIf='movies'> </app-movie-list>
+
+<div class="text-center">
+  <nav aria-label="Page navigation">
+    <ul class="pagination pagination-lg">
+      <li>
+
+        <button aria-label="First" (click)="first_page($event)" [disabled]="!has_previous()">
+          <span aria-hidden="true"> <<   </span>
+        </button>
+
+        <button aria-label="Previous" (click)="previous_page($event)" [disabled]="!has_previous()">
+          <span aria-hidden="true"> < </span>
+        </button>
+
+        <button aria-label="Next" (click)="next_page($event)" [disabled]="!has_next()">
+          <span aria-hidden="true"> > </span>
+        </button>
+
+        <button aria-label="Last" (click)="last_page($event)" [disabled]="!has_next()">
+          <span aria-hidden="true"> >> </span>
+        </button>
+
+      </li>
+    </ul>
+  </nav>
+</div>

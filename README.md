@@ -1,3 +1,12 @@
+#TODO :
+
+1. Add loading (or spinner) when loading data 
+1. Create pagination component and make pagination appears in the url (number of page)
+1. Put endpoints (urls) in a separate file and import them when needed
+1. Show detail of movie in seperate page with its own url 
+1. Add not found image, if the poser is not found
+
+
 # NgMovie
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.1.
