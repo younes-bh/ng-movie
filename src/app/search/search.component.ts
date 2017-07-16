@@ -9,6 +9,8 @@ import {NgForm} from '@angular/forms';
 })
 export class SearchComponent implements OnInit {
 
+  search_query = '';
+
   constructor(private _router: Router) { }
 
   ngOnInit() {
@@ -19,6 +21,6 @@ export class SearchComponent implements OnInit {
     if (query) {
       this._router.navigate(['/search', {q: query}]);
     }
-
+    this.search_query = '';
   }
 }
