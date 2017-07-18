@@ -6,7 +6,7 @@ export class StarsPipe implements PipeTransform {
 
   transform(value: number, args: string[]): any {
     let text = '';
-    for (let i = 0; i < value; i++) {
+    for (let i = 1; i < value; i++) {
       text += '★';
     }
     return text;
