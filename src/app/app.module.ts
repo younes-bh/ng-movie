@@ -12,16 +12,20 @@ import { StarsPipe } from './pipes/stars.pipe';
 import { SearchComponent } from './search/search.component';
 import { SearchDetailComponent } from './search-detail/search-detail.component';
 import { MovieThumbailComponent } from './movie-thumbail/movie-thumbail.component';
-import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 
 import { SearchMovieService } from './movies-services/search-movie.service';
 import { ListMovieService } from './movies-services/list-movie.service';
+import { DetailMovieService } from './movies-services/detail-movie.service'
 
 import { TopRatedMoviesComponent } from './top-rated-movies/top-rated-movies.component';
-import { OnTheAirMoviesComponent } from './on-the-air-movies/on-the-air-movies.component';
+import { NowPlayingComponent } from './now-playing/now-playing.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { FooterComponent } from './footer/footer.component';
+import { MovieDetailComponent } from './movie-detail/movie-detail.component';
+
+import { LoadingModule } from 'ngx-loading';
+
 
 @NgModule({
   declarations: [
@@ -35,44 +39,49 @@ import { FooterComponent } from './footer/footer.component';
     MovieDetailComponent,
     MovieListComponent,
     TopRatedMoviesComponent,
-    OnTheAirMoviesComponent,
+    NowPlayingComponent,
     PaginationComponent,
-    FooterComponent
+    FooterComponent,
+    MovieDetailComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
+    LoadingModule,
     RouterModule.forRoot([
       {
         path: '',
         component: PopularMoviesComponent
       },
-
+      {
+        path: 'detail/:id',
+        component: MovieDetailComponent
+      },
       {
         path: 'search',
         component: SearchDetailComponent
       },
       {
-        path: 'popular',
+        path: 'popular/:page',
         component: PopularMoviesComponent
       },
       {
-        path: 'top-rated',
+        path: 'top-rated/:page',
         component: TopRatedMoviesComponent
       },
       {
-        path: 'on-the-air',
-        component: OnTheAirMoviesComponent
+        path: 'now-playing/:page',
+        component: NowPlayingComponent
       },
       { path: '**',
         redirectTo: ''
       }
-
     ])
   ],
   providers: [SearchMovieService,
-    ListMovieService
+              ListMovieService,
+              DetailMovieService
 
   ],
   bootstrap: [AppComponent]

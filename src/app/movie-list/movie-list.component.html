@@ -1,29 +1,9 @@
-<div class="row " [hidden] = '!show_list'>
+<div class="row ">
   <div class="col-sm-6 col-md-4 " *ngFor="let movie of movie_list">
     <div class="thumbnail ">
 
-      <app-movie-thumbail [passed_movie]='movie'></app-movie-thumbail>
-
-      <p>
-        <a class="btn btn-primary" role="button" (click)="select_movie(movie)"> Show Detail</a>
-      </p>
-
+      <app-movie-thumbail [passed_movie]="movie"></app-movie-thumbail>
 
     </div>
   </div>
-</div>
-
-
-<div class="container" [hidden] = 'show_list' *ngIf="selected_movie">
-
-  <div class="jumbotron" >
-
-    <app-movie-detail [passed_movie]="selected_movie"></app-movie-detail>
-
-    <p>
-      <a class="btn btn-primary" role="button" (click)="deselect_movie()"> Hide Detail</a>
-    </p>
-
-  </div>
-
 </div>

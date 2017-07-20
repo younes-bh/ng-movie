@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component,  OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {DetailMovieService} from '../movies-services/detail-movie.service';
 
 @Component({
   selector: 'app-movie-detail',
@@ -8,19 +10,28 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MovieDetailComponent implements OnInit {
 
   movie: any;
+  id: string;
+  loading = false;
   img_base_url = 'https://image.tmdb.org/t/p/w500';
 
-
-  @Input()
-  passed_movie: any;
-
-  constructor() { }
+  constructor(private route: ActivatedRoute, private movie_detail_service: DetailMovieService) { }
 
   ngOnInit() {
-    if (this.passed_movie){
-      this.movie = this.passed_movie;
-    }
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      this.loading = true;
+      this.movie_detail_service.detail(this.id).subscribe(data => {
+        this.movie = data;
+        this.loading = false;
+      });
+    });
   }
 
-
 }
+
+
+//https://angular-2-training-book.rangle.io/handout/routing/routeparams.html
+//https://angular.io/guide/router
+//regarder ng-book
+//https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
+// change tv to movie in the endpoint because am searching tv and not movie

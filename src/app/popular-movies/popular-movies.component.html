@@ -1,39 +1,17 @@
 <!--  Le ngIf c'est pour attendre que les movies se charge, si je l'enlève rien ne s'affiche
       Il n'y a pas une autre manière de faire pour attendre ???
 -->
-<div class="jumbotron" >
-  <h1 class="text-center" > Popular movies</h1>
-</div>
-
-<app-movie-list [passed_movie_list] ='movies' *ngIf='movies'> </app-movie-list>
-
 <div>
-  <div class="container">
-    <div class="text-center">
-      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-
-        <li [ngClass]="{disabled:pager.current_page === 1}">
-          <a (click)="load(1)">First</a>
-        </li>
-
-        <li [ngClass]="{disabled:pager.current_page === 1}">
-          <a (click)="load(pager.current_page - 1)">Previous</a>
-        </li>
-
-        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.current_page === page}">
-          <a (click)="load(page)">{{page}}</a>
-        </li>
-
-        <li [ngClass]="{disabled:pager.current_page === pager.total_pages}">
-          <a (click)="load(pager.current_page + 1)">Next</a>
-        </li>
-
-        <li [ngClass]="{disabled:pager.current_page === pager.total_pages}">
-          <a (click)="load(pager.total_pages)">Last</a>
-        </li>
-
-      </ul>
-    </div>
+  <div >
+    <ngx-loading [show]="loading" ></ngx-loading>
   </div>
-</div>
 
+  <div class="jumbotron" >
+    <h1 class="text-center" > Popular Movies</h1>
+  </div>
+
+  <app-movie-list [passed_movie_list] ='movies' *ngIf='movies'> </app-movie-list>
+
+
+  <app-pagination *ngIf="movies && total_pages" [passed_total_pages]="total_pages" [selected_page]="current_page" (new_page)="change_page($event)"></app-pagination>
+</div>

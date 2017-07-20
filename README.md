@@ -1,10 +1,10 @@
 # TODO :
 
-1. Add loading (or spinner) when loading data 
-1. Create pagination component and make pagination appears in the url (number of page)
-1. Put endpoints (urls) in a separate file and import them when needed
-1. Show detail of movie in seperate page with its own url 
-1. Add not found image, if the poser is not found
+1. Add loading (or spinner) when loading data **DONE**
+1. Create pagination component and make pagination appears in the url (number of page)  **DONE**
+1. Put endpoints (urls) in a separate module and import them when needed **DONE**
+1. Show detail of movie in seperate page with its own url **DONE**
+1. Add not found image, if the poser is not found **DONE**
 1. Work with modules and import them in tha app.module.ts
 1. work with object created instead of any 
 

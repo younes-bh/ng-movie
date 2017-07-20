@@ -28,14 +28,14 @@ export class SearchComponent implements OnInit {
       .filter((text: string) => text.length > 3) // filter out if empty
       .debounceTime(500) // only once every 500ms
       .subscribe((query: string) => {
-        this._router.navigate(['/search', {q: query}]);
+        this._router.navigate(['/search', {q: query, page: 1}]);
       });
   }
 
   submit_search(event, form_data) {
     let query = form_data.value['q'];
     if (query) {
-      this._router.navigate(['/search', {q: query}]);
+      this._router.navigate(['/search', {q: query, page: 1}]);
     }
     this.search_query = '';
   }

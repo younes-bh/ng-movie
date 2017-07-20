@@ -36,7 +36,7 @@ export class ListMovieService {
 
   /*
   list(endpoint: string): any {
-    const url = endpoint + this.current_page;
+    static url = endpoint + this.current_page;
     return this._http.get(url)
       .map(response => {
         this.movies.splice(0, this.movies.length, ...response.json().results);
@@ -54,7 +54,7 @@ export class ListMovieService {
   next_page(event, endpoint: string) {
     if (this.has_next()) {
       this.current_page += 1;
-      const url = endpoint + this.current_page;
+      static url = endpoint + this.current_page;
       return this._http.get(url)
         .map(response => response.json())
         .map(data => {
@@ -70,7 +70,7 @@ export class ListMovieService {
   previous_page(event, endpoint: string) {
     if (this.has_previous()) {
       this.current_page -= 1;
-      const url = endpoint + this.current_page;
+      static url = endpoint + this.current_page;
       return this._http.get(url)
         .map(response => response.json())
         .map(data => {
@@ -85,7 +85,7 @@ export class ListMovieService {
 
   first_page(event, endpoint: string) {
     this.current_page = 1;
-    const url = endpoint + this.current_page;
+    static url = endpoint + this.current_page;
     return this._http.get(url)
       .map(response => response.json())
       .map(data => {
@@ -95,7 +95,7 @@ export class ListMovieService {
 
   last_page(event, endpoint: string) {
     this.current_page = this.total_pages;
-    const url = endpoint + this.current_page;
+    static url = endpoint + this.current_page;
     return this._http.get(url)
       .map(response => response.json())
       .map(data => {

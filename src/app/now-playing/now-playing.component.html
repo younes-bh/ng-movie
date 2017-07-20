@@ -2,16 +2,19 @@
       Il n'y a pas une autre manière de faire pour attendre ???
 -->
 <div>
+
   <div >
     <ngx-loading [show]="loading" ></ngx-loading>
   </div>
 
   <div class="jumbotron" >
-    <h1 class="text-center" > Top Rated Movies</h1>
+    <h1 class="text-center" > Now Playing</h1>
   </div>
 
   <app-movie-list [passed_movie_list] ='movies' *ngIf='movies'> </app-movie-list>
 
 
   <app-pagination *ngIf="movies && total_pages" [passed_total_pages]="total_pages" [selected_page]="current_page" (new_page)="change_page($event)"></app-pagination>
+
 </div>
+

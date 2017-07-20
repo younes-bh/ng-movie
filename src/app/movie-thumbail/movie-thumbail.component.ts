@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-movie-thumbail',
@@ -10,16 +10,21 @@ export class MovieThumbailComponent implements OnInit {
   movie: any;
   img_base_url = 'https://image.tmdb.org/t/p/w500';
 
-  @Input()
-  passed_movie: any;
+  @Input() passed_movie: any;
 
+  @Output() selected_movie: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     if (this.passed_movie) {
       this.movie = this.passed_movie;
     }
+  }
+
+  selected(event: any) {
+    this.selected_movie.emit(this.movie);
   }
 
 }

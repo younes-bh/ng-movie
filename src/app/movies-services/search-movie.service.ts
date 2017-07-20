@@ -1,5 +1,6 @@
 import { Injectable} from '@angular/core';
 import {Http} from '@angular/http';
+import {MyConstatnts} from '../static/constants';
 
 
 
@@ -7,7 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Observable';
 
-const endpoint = 'https://api.themoviedb.org/3/search/movie?api_key=977f1a27ed72e90257321e745c06e951&language=en-US&include_adult=false';
+const endpoint = MyConstatnts.endpoint_search_movie;
 
 @Injectable()
 export class SearchMovieService {
@@ -43,7 +44,7 @@ export class SearchMovieService {
   next_page(event, query) {
   if (this.has_next()) {
     this.current_page += 1;
-    const url = endpoint + '&page=' + this.current_page + '&query=' + query ;
+    static url = endpoint + '&page=' + this.current_page + '&query=' + query ;
     return this._http.get(url)
       .map(response => response.json())
       .map(data => {
@@ -59,7 +60,7 @@ export class SearchMovieService {
   previous_page(event, query) {
     if (this.has_previous()) {
       this.current_page -= 1;
-      const url = endpoint + '&page=' + this.current_page + '&query=' + query ;
+      static url = endpoint + '&page=' + this.current_page + '&query=' + query ;
       return this._http.get(url)
         .map(response => response.json())
         .map(data => {
@@ -74,7 +75,7 @@ export class SearchMovieService {
 
   first_page(event, query){
     this.current_page = 1;
-    const url = endpoint + '&page=' + this.current_page + '&query=' + query ;
+    static url = endpoint + '&page=' + this.current_page + '&query=' + query ;
     return this._http.get(url)
       .map(response => response.json())
       .map(data => {
@@ -84,7 +85,7 @@ export class SearchMovieService {
 
   last_page(event, query){
     this.current_page = this.total_pages;
-    const url = endpoint + '&page=' + this.current_page + '&query=' + query ;
+    static url = endpoint + '&page=' + this.current_page + '&query=' + query ;
     return this._http.get(url)
       .map(response => response.json())
       .map(data => {

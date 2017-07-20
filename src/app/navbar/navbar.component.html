@@ -15,9 +15,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav">
-        <li [ngClass]="{active:current_section === 1}"> <a routerLink="/popular" (click)="current_section=1">Popular</a> </li>
-        <li [ngClass]="{active:current_section === 2}"> <a routerLink="/top-rated" (click)="current_section=2">Top Rated</a> </li>
-        <li [ngClass]="{active:current_section === 3}"> <a routerLink="/on-the-air" (click)="current_section=3">On The Air</a> </li>
+        <li [ngClass]="{active:current_section === 1}"> <a [routerLink]="['/popular', 1]" (click)="current_section=1">Popular</a> </li>
+        <li [ngClass]="{active:current_section === 2}"> <a [routerLink]="['/top-rated', 1]" (click)="current_section=2">Top Rated</a> </li>
+        <li [ngClass]="{active:current_section === 3}"> <a [routerLink]="['/now-playing', 1]" (click)="current_section=3">Now Playing</a> </li>
       </ul>
 
 

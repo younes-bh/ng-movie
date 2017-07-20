@@ -1,24 +1,117 @@
 <div>
-  <div class="text-center">
-    <h1 *ngIf='movie.name'> {{movie.name}}</h1>
-    <h1 *ngIf='!movie.name'> {{movie.title}}</h1>
 
-    <img *ngIf="movie.poster_path" [src]= 'img_base_url + movie.poster_path' alt="poster du film">
-    <img *ngIf="!movie.poster_path" src= "../../assets/image/image_not_found.png" alt="poster du film">
+  <div >
+    <ngx-loading [show]="loading" ></ngx-loading>
+  </div>
+
+  <div *ngIf="movie" class="container">
+
+    <div class="jumbotron" >
+
+      <div class="text-center">
+        <h1 *ngIf='movie.title'> {{movie.title}}</h1>
+
+        <img *ngIf="movie.poster_path" [src]= 'img_base_url + movie.poster_path' alt="poster du film">
+        <img *ngIf="!movie.poster_path" src= "../../assets/image/image_not_found.png" alt="poster du film">
+
+      </div>
+
+      <h2>
+        <span  class="label label-primary">
+          Synopsis
+        </span>
+      </h2>
+      <p> {{movie.overview}} </p>
+
+      <h2>
+        <span  class="label label-primary">
+          Genre
+        </span>
+      </h2>
+      <div>
+        <h4>
+          <span *ngFor="let genre of movie.genres" class="label label-info" style="margin-right: 1%"> {{genre.name}} </span>
+        </h4>
+      </div>
+
+      <h2>
+        <span  class="label label-primary">
+          Status
+        </span>
+      </h2>
+      <p> {{movie.status}}</p>
+
+
+      <h2>
+        <span  class="label label-primary">
+          Release date
+        </span>
+      </h2>
+      <p> {{movie.release_date}}</p>
+
+      <h2>
+        <span  class="label label-primary">
+          Runtime
+        </span>
+      </h2>
+      <p> {{movie.runtime}} min</p>
+
+      <h2>
+        <span  class="label label-primary">
+          Spoken languages
+        </span>
+      </h2>
+      <div>
+        <h4>
+          <span  *ngFor="let lang of movie.spoken_languages" class="label label-info" style="margin-right: 1%"> {{lang.name}} </span>
+        </h4>
+      </div>
+
+
+      <h2>
+        <span  class="label label-primary">
+          Production companies
+        </span>
+      </h2>
+      <div>
+        <h4>
+          <span *ngFor="let company of movie.production_companies" class="label label-info" style="margin-right: 1%"> {{company.name}} </span>
+        </h4>
+      </div>
+
+      <h2>
+        <span  class="label label-primary">
+          Production countries
+        </span>
+      </h2>
+      <div>
+        <h4>
+          <span  *ngFor="let country of movie.production_countries" class="label label-info" style="margin-right: 1%"> {{country.name}} </span>
+        </h4>
+      </div>
+
+
+
+
+
+
+      <h2>
+        <span  class="label label-primary">
+          Vote Average
+        </span>
+      </h2>
+      <p> {{movie.vote_average | stars}} ({{movie.vote_average}})</p>
+
+      <h2>
+        <span  class="label label-primary">
+         Popularity
+        </span>
+      </h2>
+      <p> {{movie.popularity}}  ({{movie.vote_count}} votes)</p>
+
+    </div>
 
   </div>
 
-  <h3>Synopsis</h3>
-  <p>{{movie.overview}}</p>
-
-  <h3>Release Date</h3>
-  <p *ngIf='movie.first_air_date'>{{movie.first_air_date}}</p>
-  <p *ngIf='!movie.first_air_date'>{{movie.release_date}}</p>
-
-
-  <h3> Vote Average </h3>
-  <p>{{movie.vote_average | stars}} ({{movie.vote_average}})</p>
-
-  <h3> Popularity </h3>
-  <p>{{movie.popularity}}  ({{movie.vote_count}} votes) </p>
 </div>
+

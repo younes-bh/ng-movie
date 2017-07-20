@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {isNumber} from "util";
 
 // http://jasonwatmore.com/post/2016/08/23/angular-2-pagination-example-with-logic-like-google
 
@@ -10,8 +11,9 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PaginationComponent implements OnInit {
 
-  @Input()
-  passed_total_pages;
+  @Input() passed_total_pages: number;
+  @Input() selected_page: number;
+  @Output() new_page: EventEmitter<number> = new EventEmitter;
   // pager object
   pager: any = {};
 
@@ -19,8 +21,21 @@ export class PaginationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.set_page(1);
+    this.set_page(this.selected_page);
   }
+
+
+  set_page(page: number) {
+    if (page < 1 || page > this.pager.total_pages) {
+      return;
+    }
+    this.selected_page = page;
+    // get pager object from service
+    this.pager = this.get_pager(this.passed_total_pages, page);
+    this.new_page.emit(page);
+
+  }
+
 
   get_pager(total_pages: number, current_page: number = 1) {
     let start_page: number;
@@ -56,21 +71,12 @@ export class PaginationComponent implements OnInit {
   }
 
   range (start: number, end: number) {
-    let range_array =[] ;
+    let range_array = Array<number>();
     for (let i: number = start; i < end; i++) {
       range_array[i - start] = i;
     }
     return range_array;
   }
 
-  set_page(page: number) {
-    if (page < 1 || page > this.pager.total_pages) {
-      return;
-    }
-
-    // get pager object from service
-    this.pager = this.get_pager(this.passed_total_pages, page);
-
-  }
 
 }
